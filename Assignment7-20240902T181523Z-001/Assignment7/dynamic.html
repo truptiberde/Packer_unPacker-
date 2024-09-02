@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dynamic Divs</title>
+    <style>
+        .dynamic-div {
+            margin: 10px;
+            padding: 10px;
+            border: 1px solid black;
+        }
+    </style>
+</head>
+<body>
+
+<div id="container">
+    <button onclick="createDiv()">Create Div</button>
+</div>
+
+<script>
+    let counter = 1;
+
+    function createDiv() {
+        const container = document.getElementById('container');
+
+        const newDiv = document.createElement('div');
+        newDiv.classList.add('dynamic-div');
+        newDiv.id = 'div' + counter;
+        newDiv.innerText = 'Div ' + counter;
+
+        const textBox = document.createElement('input');
+        textBox.type = 'text';
+        textBox.id = 'text' + counter;
+        textBox.name = 'text' + counter;
+
+        const addButton = document.createElement('button');
+        addButton.innerText = 'Add';
+        addButton.onclick = function() {
+            alert('Button in ' + newDiv.id + ' clicked');
+        };
+
+        newDiv.appendChild(textBox);
+        newDiv.appendChild(addButton);
+
+        const removeButton = document.createElement('button');
+        removeButton.innerText = 'Remove';
+        removeButton.onclick = function() {
+            removeElements(newDiv);
+        };
+        
+        newDiv.appendChild(removeButton);
+
+        container.appendChild(newDiv);
+        counter++;
+    }
+
+    function removeElements(div) {
+        while (div.firstChild) {
+            div.removeChild(div.firstChild);
+        }
+        div.remove();
+    }
+</script>
+
+</body>
+</html>
